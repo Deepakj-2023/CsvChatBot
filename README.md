@@ -26,26 +26,26 @@ An AI-powered CSV Exploratory Data Analysis (EDA) ChatBot that allows users to a
 
        1️⃣ Frontend (Streamlit UI)
 
-           Open a terminal and run:
+        Open a terminal and run:
 
-             cd frontend
+         cd frontend
 
-             streamlit run app.py
+         streamlit run app.py
 
 
-            Frontend runs at:
+        Frontend runs at:
 
-            http://localhost:8501
+         http://localhost:8501
 
        2️⃣ Backend (FastAPI Server)
 
-           Open another terminal and run:
+        Open another terminal and run:
 
-              cd backend
+          cd backend
 
-              uvicorn main:app --reload --port 8002
+          uvicorn main:app --reload --port 8002
 
 
-            Backend runs at:
+         Backend runs at:
 
-            http://127.0.0.1:8002
+         http://127.0.0.1:8002
