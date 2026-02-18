@@ -1,0 +1,15 @@
+[project]
+name = "agentic-ai-training-code"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "altair==4.2.2",
+    "fastapi>=0.129.0",
+    "fsspec>=2026.2.0",
+    "langchain-groq>=1.1.2",
+    "pandas>=3.0.0",
+    "requests>=2.32.5",
+    "streamlit>=1.19.0",
+]
