@@ -7,7 +7,7 @@ app = FastAPI(title="DEEPAK TEST SERVER 999")
 agent =  PandasAgent("C://Users//Deepak//Desktop//Agentic Ai Training Code//Data//books_cleaned.csv")
 class QuestionRequest(BaseModel):
     question :str
-print("🔥🔥🔥 MY FASTAPI FILE IS RUNNING 🔥🔥🔥")
+
 import os
 print("RUNNING FILE PATH:", os.path.abspath(__file__))
 
@@ -16,7 +16,7 @@ def test():
     return {"hello": "world"}
 @app.post("/ask")
 def ask_question(req :QuestionRequest):
-    print("🔥 ENDPOINT HIT 🔥")
+    
     ##return {"hello": "world"}
     
     question  =  req.question.strip()
@@ -44,13 +44,13 @@ def ask_question(req :QuestionRequest):
             "data" : result
             }
        elif cat =="visualization":
-           code =  agent.generate_pandas_code(req.question)
-           res  =  agent.execute_code(code)
+           code =  agent.generate_pandasvis_code(req.question)
+           img_base64  =  agent.execute_visualization_code(code)
            return {
                  "status" : "Success",
                  "type" : "visualization",
                  "generated_code":code,
-                 "data" : res
+                 "data" : img_base64
            }
        else:
             return {

@@ -2,6 +2,9 @@
 import streamlit  as st 
 import requests
 import pandas as pd
+import base64
+from io import BytesIO
+from PIL import Image
 st.title("Welcome Csv ChatBot")
 st.sidebar.header("Dataset Infromation")
 ##   strating here......
@@ -43,7 +46,14 @@ if st.button("Submit"):
                   df_result = pd.DataFrame(data["data"])
                   st.dataframe(df_result)
               elif data["type"] == "visualization":
-                  st.image(data["data"]["image"])
+                  img_base64 = data.get("data") 
+                  if img_base64:
+                      img_bytes = BytesIO(base64.b64decode(img_base64))
+                      img = Image.open(img_bytes)
+                      st.image(img)
+                  else:
+                      st.warning("Visualization image not found")
+                                                                            
               else:
                   st.write(data["data"])
           else:
