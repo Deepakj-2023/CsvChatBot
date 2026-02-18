@@ -18,32 +18,34 @@ An AI-powered CSV Exploratory Data Analysis (EDA) ChatBot that allows users to a
 
 🛠️ Programming Languages & Technologies
 
-🐍 Python   🔗 LangChain   ⚡ FastAPI 🎈 Streamlit  📊 Pandas  📈 Matplotlib
+🐍 Python      🔗 LangChain    ⚡ FastAPI    🎈 Streamlit   📊 Pandas   📈 Matplotlib
 
-⚙️ Project Working Steps
+⚙️ Project Working Steps:
 
-The project runs in two parts:
+   The project runs in two parts:
 
-1️⃣ Frontend (Streamlit UI)
+       1️⃣ Frontend (Streamlit UI)
 
-Open a terminal and run:
+           Open a terminal and run:
 
-cd frontend
-streamlit run app.py
+             cd frontend
 
-
-Frontend runs at:
-
-http://localhost:8501
-
-2️⃣ Backend (FastAPI Server)
-
-Open another terminal and run:
-
-cd backend
-uvicorn main:app --reload --port 8002
+             streamlit run app.py
 
 
-Backend runs at:
+            Frontend runs at:
 
-http://127.0.0.1:8002
+            http://localhost:8501
+
+       2️⃣ Backend (FastAPI Server)
+
+           Open another terminal and run:
+
+              cd backend
+
+              uvicorn main:app --reload --port 8002
+
+
+            Backend runs at:
+
+            http://127.0.0.1:8002
