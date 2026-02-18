@@ -47,12 +47,19 @@ if st.button("Submit"):
                   st.dataframe(df_result)
               elif data["type"] == "visualization":
                   img_base64 = data.get("data") 
-                  if img_base64:
-                      img_bytes = BytesIO(base64.b64decode(img_base64))
-                      img = Image.open(img_bytes)
-                      st.image(img)
+                  if not img_base64:
+                     st.warning("Visualization image not found")
+                
+                  elif isinstance(img_base64, str) and img_base64.startswith("ERROR"):
+                    st.error(img_base64)
+
                   else:
-                      st.warning("Visualization image not found")
+                    try:
+                        img_bytes = BytesIO(base64.b64decode(img_base64))
+                        img = Image.open(img_bytes)
+                        st.image(img)
+                    except Exception as e:
+                        st.error(f"Invalid image data: {str(e)}")
                                                                             
               else:
                   st.write(data["data"])
