@@ -116,7 +116,7 @@ if st.button("Submit Query", type="primary"):
                         elif resp_type == "visualization":
                             if resp_content:
                                 img_data = base64.b64decode(resp_content)
-                                st.image(Image.open(BytesIO(img_data)), use_container_width=True)
+                                st.image(Image.open(BytesIO(img_data)))
                         else:
                             st.info(str(resp_content))
             except Exception as e:
