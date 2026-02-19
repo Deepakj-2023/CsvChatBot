@@ -25,62 +25,77 @@ print("RUNNING FILE PATH:", os.path.abspath(__file__))
 def test():
     return {"hello": "world"}
 @app.post("/ask")
-def ask_question(req :QuestionRequest):
-    
-    ##return {"hello": "world"}
-    
-    question  =  req.question.strip()
-    if not question or len(question)<5:
-        return{
+def ask_question(req: QuestionRequest):
+    question = req.question.strip()
+    if not question or len(question) < 5:
+        return {
             "status": "Invalid",
             "message": "Question must be at least 5 characters long."
         }
     try:
-       cat  =  agent.classify_question(req.question)
-       if cat=="normal_chat":
-           return{
-                "status" :"Normal Chat",
-                "message" :"Sorry ,please ask question realted to the data "
-           }
-       elif cat=="data_question":
-        code = agent.generate_pandas_code(req.question)
-        print("Generated Code:", code)
-        result = agent.execute_code(code)
-        print("Execution Result:", result)
-        return {
-            "status": "Success",
-            "type" :"table",
-            "generated_code" : code,
-            "data" : result
+        # Classify question
+        cat = agent.classify_question(question)
+
+        if cat == "normal_chat":
+            # Normal chat goes directly to LLM
+            code  =  agent.generate_pandas_code(question)
+            print("Generated Code:\n", code)
+            Result = agent.execute_code(code)
+            print("Execution Result:\n", Result) 
+            prompt = f"You are a helpful AI assistant. Answer the user's question:\nUser: {question} and based the answer on the following data result: {Result}"
+            llm_response = agent.llm.invoke(prompt)
+            return {
+                "status": "Normal Chat",
+                "message": llm_response.content.strip()
             }
-       elif cat =="visualization":
-           code =  agent.generate_pandasvis_code(req.question)
-           img_base64  =  agent.execute_visualization_code(code)
-           return {
-                 "status" : "Success",
-                 "type" : "visualization",
-                 "generated_code":code,
-                 "data" : img_base64
-           }
-       else:
+
+        elif cat == "data_question":
+            # Generate Pandas code
+            code = agent.generate_pandas_code(question)
+            print("Generated Pandas Code:\n", code)
+
+            # Execute Pandas code
+            data_result = agent.execute_code(code)
+            print("Data Result:\n", data_result)
+
+            # Send results + question to LLM for explanation
+            prompt = f"""
+You are a helpful AI assistant. Here is some data extracted from a dataset:
+
+Data: {data_result}
+
+User asked: {question}
+
+Explain the results in a clear and friendly way, summarizing or suggesting insights as needed.
+"""
+            llm_response = agent.llm.invoke(prompt)
+
+            return {
+                "status": "Success",
+                "type": "table",
+                "generated_code": code,
+                "data": data_result,
+                "llm_message": llm_response.content.strip()
+            }
+
+        elif cat == "visualization":
+            code = agent.generate_pandasvis_code(question)
+            img_base64 = agent.execute_visualization_code(code)
+            return {
+                "status": "Success",
+                "type": "visualization",
+                "generated_code": code,
+                "data": img_base64
+            }
+
+        else:
             return {
                 "status": "Error",
                 "message": f"Unknown category: {cat}"
             }
+
     except Exception as e:
         return {
             "status": "Error",
             "message": str(e)
         }
-
-@app.get("/dataset_info")
-def dataset_info():
-    df  =  agent.df
-    return {
-      "rows": df.shape[0],
-        "columns": df.shape[1],
-        "column_names" : list(df.columns),
-        "data_types" :{
-             col : str(dtype) for col,dtype in df.dtypes.items()
-        }
-    }
