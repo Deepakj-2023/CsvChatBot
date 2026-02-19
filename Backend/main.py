@@ -1,9 +1,19 @@
 from fastapi  import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pandas as pd
 from logic import PandasAgent
 
+
 app = FastAPI(title="DEEPAK TEST SERVER 999")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 agent =  PandasAgent("C://Users//Deepak//Desktop//Agentic Ai Training Code//Data//books_cleaned.csv")
 class QuestionRequest(BaseModel):
     question :str
