@@ -25,11 +25,13 @@ Bash
  git clone https://github.com/MSDeepak718/CSVbot.git
 
  cd CSVbot
+
  2. Configure Environment Variables
 
  Create a .env file in the backend directory:
 
  GROQ_API_KEY=your_groq_api_key_here
+
  3. Install Dependencies
  Using uv for high-speed installation:
 
@@ -38,6 +40,7 @@ Bash
  uv sync
 
 How to Run :
+
 The project runs in two separate parts. Ensure you have your CSV file (e.g., books_cleaned.csv) inside the backend folder.
 
 Backend (FastAPI Server)
@@ -63,5 +66,5 @@ Frontend (Streamlit UI)
   cd frontend
 
   uv run streamlit run app.py
-  
+
   UI URL: http://localhost:8501
