@@ -19,33 +19,49 @@ Tech Stack
 
 Setup Instructions
  1. Clone the Repository
+
 Bash
+
  git clone https://github.com/MSDeepak718/CSVbot.git
+
  cd CSVbot
  2. Configure Environment Variables
+
  Create a .env file in the backend directory:
+
  GROQ_API_KEY=your_groq_api_key_here
  3. Install Dependencies
  Using uv for high-speed installation:
+
  Bash
+
  uv sync
+
 How to Run :
 The project runs in two separate parts. Ensure you have your CSV file (e.g., books_cleaned.csv) inside the backend folder.
 
 Backend (FastAPI Server)
+
   Open a terminal and run:
 
   Bash
+
   cd backend
+
   uv run uvicorn main:app --reload --port 8002
+
   API URL: http://127.0.0.1:8002
 
   Docs: http://127.0.0.1:8002/docs
 
 Frontend (Streamlit UI)
+
   Open a second terminal and run:
 
   Bash
+
   cd frontend
+
   uv run streamlit run app.py
+  
   UI URL: http://localhost:8501
