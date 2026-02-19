@@ -1,4 +1,5 @@
 CSVbot: AI-Powered Data Analyst
+
 CSVbot is an intelligent data exploration tool that allows you to chat with your CSV files. By combining FastAPI, Streamlit, and Llama 3.3 (via Groq), it transforms natural language questions into executable Python code, generates insightful tables, and creates beautiful Matplotlib visualizations on the fly.
 
 Features :
