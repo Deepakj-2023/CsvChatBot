@@ -8,8 +8,10 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg") 
 import matplotlib.pyplot as plt
-
+from dotenv import load_dotenv
 import base64
+
+load_dotenv()
 
 class PandasAgent:
     def __init__(self,csv_url:str):
@@ -19,8 +21,8 @@ class PandasAgent:
     """
         self.llm  = ChatGroq(
                 model ="llama-3.1-8b-instant",
-                api_key ="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",
-                    temperature = 0
+                api_key = os.getenv("API_KEY"),
+                temperature = 0
             )
 
         self.memory  = []
