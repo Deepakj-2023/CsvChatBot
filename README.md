@@ -1,51 +1,51 @@
-📊 CSV EDA ChatBot
+CSVbot: AI-Powered Data Analyst
+CSVbot is an intelligent data exploration tool that allows you to chat with your CSV files. By combining FastAPI, Streamlit, and Llama 3.3 (via Groq), it transforms natural language questions into executable Python code, generates insightful tables, and creates beautiful Matplotlib visualizations on the fly.
 
-An AI-powered CSV Exploratory Data Analysis (EDA) ChatBot that allows users to ask natural language questions about a dataset and receive structured data outputs, visualizations, and basic machine learning insights.
+Features :
+- *Natural Language Querying*: Ask questions about your data in plain English.
+- *Automated Code Generation*: Automatically generates and executes pandas code to retrieve information.
+- *Data Explanation*: Provides clear, human-like summaries of complex data results.
+- *REST API*: Built with FastAPI for easy integration with other tools and frontends.
+- *Efficient Performance*: Uses Groq's high-speed inference for near-instant responses.
 
-🚀 Features
+Tech Stack
+ -*Frontend*: Streamlit (Python)
+ -*Backend*: FastAPI, Uvicorn
+ -*AI Integration*: LangChain, LangChain-Groq
+ -*LLM*: llama-3.1-8b-instant 
+ -*Visualization*: Matplotlib
+ -*Data Processing*: Pandas
+ -*Environment Management*: UV, python-dotenv
 
-    📊 Exploratory Data Analysis (EDA)
+Setup Instructions
+ 1. Clone the Repository
+Bash
+ git clone https://github.com/MSDeepak718/CSVbot.git
+ cd CSVbot
+ 2. Configure Environment Variables
+ Create a .env file in the backend directory:
+ GROQ_API_KEY=your_groq_api_key_here
+ 3. Install Dependencies
+ Using uv for high-speed installation:
+ Bash
+ uv sync
+How to Run :
+The project runs in two separate parts. Ensure you have your CSV file (e.g., books_cleaned.csv) inside the backend folder.
 
-    📈 Dynamic Data Visualization
+Backend (FastAPI Server)
+  Open a terminal and run:
 
-    🤖 Basic Machine Learning Insights
+  Bash
+  cd backend
+  uv run uvicorn main:app --reload --port 8002
+  API URL: http://127.0.0.1:8002
 
-    💬 Natural Language Query Support
+  Docs: http://127.0.0.1:8002/docs
 
-    📑 Structured Data Output (Tables)
+Frontend (Streamlit UI)
+  Open a second terminal and run:
 
-     🖼️ Automated Chart Generation
-
-🛠️ Programming Languages & Technologies
-
-🐍 Python      🔗 LangChain    ⚡ FastAPI    🎈 Streamlit   📊 Pandas   📈 Matplotlib
-
-⚙️ Project Working Steps:
-
-   The project runs in two parts:
-
-       1️⃣ Frontend (Streamlit UI)
-
-        Open a terminal and run:
-
-         cd frontend
-
-         streamlit run app.py
-
-
-        Frontend runs at:
-
-         http://localhost:8501
-
-       2️⃣ Backend (FastAPI Server)
-
-        Open another terminal and run:
-
-          cd backend
-
-          uvicorn main:app --reload --port 8002
-
-
-         Backend runs at:
-
-         http://127.0.0.1:8002
+  Bash
+  cd frontend
+  uv run streamlit run app.py
+  UI URL: http://localhost:8501
